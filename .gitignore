@@ -1,0 +1,52 @@
+HELP.md
+/order-consumer/target/
+/order-producer/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+/order-consumer/.apt_generated
+/order-consumer/.classpath
+/order-consumer/.factorypath
+/order-consumer/.project
+/order-consumer/.settings
+/order-consumer/.springBeans
+/order-consumer/.sts4-cache
+
+/order-producer/.apt_generated
+/order-producer/.classpath
+/order-producer/.factorypath
+/order-producer/.project
+/order-producer/.settings
+/order-producer/.springBeans
+/order-producer/.sts4-cache
+
+### IntelliJ IDEA ###
+/order-consumer/.idea
+/order-consumer/*.iws
+/order-consumer/*.iml
+/order-consumer/*.ipr
+
+/order-producer/.idea
+/order-producer/*.iws
+/order-producer/*.iml
+/order-producer/*.ipr
+
+### NetBeans ###
+/order-consumer/nbproject/private/
+/order-consumer/nbbuild/
+/order-consumer/dist/
+/order-consumer/nbdist/
+/order-consumer/.nb-gradle/
+/order-consumer/build/
+
+/order-producer/nbproject/private/
+/order-producer/nbbuild/
+/order-producer/dist/
+/order-producer/nbdist/
+/order-producer/.nb-gradle/
+/order-producer/build/
+
+### VS Code ###
+/order-consumer/.vscode/
+
+/order-producer/.vscode/

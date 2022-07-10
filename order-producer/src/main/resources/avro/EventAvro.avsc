@@ -1,0 +1,59 @@
+{
+  "type": "record",
+  "name": "EventAvro",
+  "namespace": "br.com.kafka.order.avro",
+  "fields": [
+    {
+      "name": "newPayload",
+      "type": {
+        "type": "record",
+        "name": "OrderAvro",
+        "fields": [
+          {
+            "name": "id",
+            "type": [
+              "null",
+              {
+                "type": "string",
+                "avro.java.string": "String"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "total",
+            "type": [
+              "null",
+              {
+                "type": "string",
+                "avro.java.string": "String"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "user",
+            "type": [
+              "null",
+              {
+                "type": "record",
+                "name": "UserAvro",
+                "namespace": "br.com.kafka.order.avro",
+                "fields": [
+                  {
+                    "name": "login",
+                    "type": {
+                      "type": "string",
+                      "avro.java.string": "String"
+                    }
+                  }
+                ]
+              }
+            ],
+            "default": null
+          }
+        ]
+      }
+    }
+  ]
+}
