@@ -15,11 +15,12 @@ Running the application
 ```
 mvn spring-boot:run
 ```
+## REST API
 [POST] To Create Order and send to Kafka
 ```
 curl -X POST "http://localhost:8080/api/orders" -H "Content-Type: application/json" -d "{\"id\":5,\"total\": 10.0,\"login\": \"aurelio\"}"
 ```
-Publishing on kafka topic ```order```
+Check on Console the LOG about publishing on kafka topic ```order```
 ```
 newOrderRequest=OrderRequest(id=648331741, total=10.0, login=aurelio)
 kafkaProducerEvent key="null" topic="order" partition="1"

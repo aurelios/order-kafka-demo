@@ -21,6 +21,7 @@ HELP.md
 /order-producer/.sts4-cache
 
 ### IntelliJ IDEA ###
+/.idea
 /order-consumer/.idea
 /order-consumer/*.iws
 /order-consumer/*.iml
