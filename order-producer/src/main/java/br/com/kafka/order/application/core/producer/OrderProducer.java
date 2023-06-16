@@ -11,6 +11,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -25,8 +26,11 @@ public class OrderProducer {
 
     public void send(EventAvro newOrderEvent){
         try{
+            var a = new Random().ints(1,3);
+
             final ProducerRecord<String, EventAvro> record = new ProducerRecord<>(ORDER_TOPIC, newOrderEvent);
-            SendResult<String, EventAvro> result = kafkaTemplate.send(record).get(sendTimeout, TimeUnit.SECONDS);
+
+            SendResult<String, EventAvro> result = kafkaTemplate.send(ORDER_TOPIC, a.findAny().getAsInt()+"",newOrderEvent).get(sendTimeout, TimeUnit.SECONDS);
 
             logger.info(LOG_TEMPLATE_PRODUCER, record.key(), record.topic(), result.getRecordMetadata().partition());
         } catch (Exception e) {

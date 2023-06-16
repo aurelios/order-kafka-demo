@@ -15,7 +15,7 @@ public class OrderConsumer {
 
     private static final String ORDER_TOPIC = "order";
     private final Logger logger = LoggerFactory.getLogger(OrderConsumer.class);
-    public static final String LOG_SUCCESS_TEMPLATE_CONSUMER = "OrderConsumerEvent(orderId=\"{}\" orderTotal=\"{}\" topic=\"{}\" partition=\"{}\" offset=\"{}\")";
+    public static final String LOG_SUCCESS_TEMPLATE_CONSUMER = "OrderConsumerEvent(thread={} orderId=\"{}\" orderTotal=\"{}\" topic=\"{}\" partition=\"{}\" offset=\"{}\")";
     public static final String LOG_ERROR_TEMPLATE_CONSUMER = "OrderConsumerEvent ERROR (orderId=\"{}\" topic=\"{}\" partition=\"{}\" offset=\"{}\")";
 
     /** Nao recomendado
@@ -26,20 +26,20 @@ public class OrderConsumer {
      *         })
      */
     @KafkaListener(topics = ORDER_TOPIC, containerFactory = "kafkaRetryListenerContainerFactory", groupId = "order")
-    public void consume(ConsumerRecord<String, EventAvro> record) {
+    public void consume(ConsumerRecord<String, EventAvro> recordOrder) {
 
-        final EventAvro event = record.value();
+        final EventAvro event = recordOrder.value();
         final OrderAvro newOrder = event.getNewPayload();
 
-        logger.info(LOG_SUCCESS_TEMPLATE_CONSUMER, record.key(), newOrder.getTotal(), record.topic(), record.partition(), record.offset());
+        logger.info(LOG_SUCCESS_TEMPLATE_CONSUMER,Thread.currentThread().getId(), recordOrder.key(), newOrder.getTotal(), recordOrder.topic(), recordOrder.partition(), recordOrder.offset());
 
         try {
             if(new BigDecimal(newOrder.getTotal()).doubleValue() > 1000){
                 throw new IllegalArgumentException("Não é permitido pedidos com total maior que 1000");
             }
-            logger.info(String.format("OrderConsumerEvent(pedido=%s no total=%s para o usuario=%s) processado com sucesso!", newOrder.getId(), newOrder.getTotal(), newOrder.getUser().getLogin()));
+            //logger.info(String.format("OrderConsumerEvent(pedido=%s no total=%s para o usuario=%s) processado com sucesso!", newOrder.getId(), newOrder.getTotal(), newOrder.getUser().getLogin()));
         } catch (Exception e) {
-            logger.error(LOG_ERROR_TEMPLATE_CONSUMER, record.key(), record.topic(), record.partition(), record.offset());
+            logger.error(LOG_ERROR_TEMPLATE_CONSUMER, recordOrder.key(), recordOrder.topic(), recordOrder.partition(), recordOrder.offset());
             throw e;
         }
     }
