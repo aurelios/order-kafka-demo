@@ -57,7 +57,7 @@ order: partitions assigned: [order-0]
 
 ## Cheking information about consumer and partitions
 ```
-docker exec -it broker bash
+docker exec -it broker-1 bash
 kafka-consumer-groups --bootstrap-server=localhost:9092 --group=order --describe
 ```
 Output
